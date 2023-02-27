@@ -9,26 +9,35 @@ Obtaining concentration parameter $\alpha$             |  Calculation of epistem
 # Abstract
 Despite the huge success of object detection, the training process still requires an immense amount of labeled data. Although various active learning solutions for object detection have been proposed, most existing works do not take advantage of epistemic uncertainty, which is an important metric for capturing the usefulness of the sample. Also, previous works pay little attention to the attributes of each bounding box (e.g., nearest object, box size) when computing the informativeness of an image. In this paper, we propose a new active learning strategy for object detection that overcomes the shortcomings of prior works. To make use of epistemic uncertainty, we adopt evidential deep learning (EDL) and propose a new module termed model evidence head (MEH), that makes EDL highly compatible with object detection. Based on the computed epistemic uncertainty of each bounding box, we propose hierarchical uncertainty aggregation (HUA) for obtaining the informativeness of an image. HUA realigns all bounding boxes into multiple levels based on the attributes and aggregates uncertainties in a bottom-up order, to effectively capture the context within the image. Experimental results show that our method outperforms existing state-of-the-art methods by a considerable margin.
 
+# Environment Info
+```
+sys.platform: linux
+
+Python: 3.7.10 (default, Jun  4 2021, 14:48:32) [GCC 7.5.0]  
+Pytorch : 1.5.0  
+TorchVision: 0.6.0  
+Cudatoolkit : 10.1.243  
+OpenCV: 4.5.2  
+MMCV: 1.3.8  
+MMDetection: 2.13.0  
+MMDetection Compiler: GCC 7.3  
+MMDetection CUDA Compiler: 10.1  
+```
+
 # Running Code
 ```
-#For miniImageNet 
+#For RetinaNet 
 
-cd /miniImageNet/[miniImageNet][IID] or /miniImageNet/[miniImageNet][Non-IID]
-python miniimagenet_train.py        --gpu {GPU device number}
-                                    --update_lr {task-lever inner update learning rate}
-                                    --meta-lr {meta-level outer learning learning rate}
-                                    --round {number of communication round}
-                                    --n_user {number of clients}                                  
+python tools/train_RetinaNet.py     --gpu-ids {GPU device number}
+                                    --work_dir {dir to save logs and models}
+                                    --config {train config file path}                             
                                     
-#For CIFAR-100
+#For SSD
 
-cd /CIFAR100/[CIFAR100][IID] or /CIFAR100/[CIFAR100][Non-IID]
-python cifar100_train.py            --gpu {GPU device number}
-                                    --update_lr {task-lever inner update learning rate}
-                                    --meta-lr {meta-level outer learning learning rate}
-                                    --round {number of communication round}
-                                    --n_user {number of clients}
+python tools/train_SSD.py           --gpu-ids {GPU device number}
+                                    --work_dir {dir to save logs and models}
+                                    --config {train config file path}     
 ```
 
 # Acknowledgement
-Our code is based on the implementations of [Multiple Instance Active Learning for Object Detection]([url](https://github.com/yuantn/MI-AOD)).
+Our code is based on the implementations of [Multiple Instance Active Learning for Object Detection](https://github.com/yuantn/MI-AOD).
